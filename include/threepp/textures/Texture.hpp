@@ -54,7 +54,8 @@ namespace threepp {
 
         bool matrixAutoUpdate = true;
         Matrix3 matrix{};
-
+         
+        bool isCubeTexture = false; 
         bool generateMipmaps = true;
         bool premultiplyAlpha = false;
         int unpackAlignment = 4;// valid values: 1, 2, 4, 8 (see http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPixelStorei.xml)
@@ -66,6 +67,7 @@ namespace threepp {
         int encoding = LinearEncoding;
 
         Texture(const Texture&) = delete;
+        Texture(std::optional<Image> image, int mapping, int wraps, int wrapt,int magFilter,int minFilter, int format, int type, unsigned anisortropy, int encoding);
         Texture operator=(const Texture&) = delete;
 
         std::optional<std::function<void(Texture&)>> onUpdate;
