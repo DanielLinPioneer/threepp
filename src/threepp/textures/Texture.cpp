@@ -12,6 +12,21 @@ Texture::Texture(std::optional<Image> image)
     : uuid(math::generateUUID()),
       image(std::move(image)) {}
 
+Texture::Texture(std::optional<Image> image, int _mapping, int _wraps, int _wrapt,
+    int _magFilter, int _minFilter, int _format, int _type, unsigned _anisortropy, int _encoding) 
+    : uuid(math::generateUUID()), image(std::move(image))     
+{
+    mapping = _mapping;
+    wrapS = _wraps;
+    wrapT = _wrapt;
+    magFilter = _magFilter;
+    minFilter = _minFilter;
+    format = _format;
+    type = _type;
+    anisotropy = _anisortropy;
+    encoding = _encoding;
+}
+
 std::shared_ptr<Texture> Texture::create(std::optional<Image> image) {
 
     return std::shared_ptr<Texture>(new Texture(std::move(image)));
@@ -137,6 +152,7 @@ Texture& Texture::copy(const Texture& source) {
     this->matrixAutoUpdate = source.matrixAutoUpdate;
     this->matrix.copy(source.matrix);
 
+    this->isCubeTexture = source.isCubeTexture;
     this->generateMipmaps = source.generateMipmaps;
     this->premultiplyAlpha = source.premultiplyAlpha;
     this->unpackAlignment = source.unpackAlignment;
